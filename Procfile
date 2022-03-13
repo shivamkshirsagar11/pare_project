@@ -1,1 +1,0 @@
-web: gunicorn pare_project.wsgi:application --log-file -
