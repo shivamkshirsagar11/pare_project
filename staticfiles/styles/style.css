@@ -172,7 +172,7 @@ body {
 }
 
 .login-1 .bg-img {
-    background: url() top left repeat;
+    background: url(../img/img-1.jpg) top left repeat;
     background-size: cover;
     z-index: 999;
     min-height: 100vh;
@@ -532,7 +532,7 @@ body {
 .login-1  .animated-text h1{
     display: block;
     text-shadow: 0 0 80px rgba(255, 255, 255, 0.5);
-    background: url() repeat-y;
+    background: url(../img/animated-text.png) repeat-y;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     -webkit-animation: aitf 80s linear infinite;
@@ -598,7 +598,7 @@ body {
     border-radius: 20px;
     margin: 0 auto;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    background: url() top left repeat;
+    background: url(../img/img-5.jpg) top left repeat;
     background-size: cover;
     position: relative;
     max-width: 1140px;
