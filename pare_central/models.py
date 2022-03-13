@@ -1,7 +1,7 @@
 import datetime
 from django.db import models as m
 class BaseProfile(m.Model):
-    lastActive = m.CharField(max_length=25,default = datetime.datetime.now().strftime("%I:%M%p"))
+    lastActive = m.CharField(max_length=25,default = "now")
     name = m.CharField(max_length=125,unique=True)
     email = m.EmailField(max_length=255,unique=True)
     password = m.CharField(max_length=500)
