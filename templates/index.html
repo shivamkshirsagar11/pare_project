@@ -1,0 +1,129 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <title>Pare - login here</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <!-- External CSS libraries -->
+    <link type="text/css" rel="stylesheet" href="{% static 'styles/bootstrap.min.css' %}">
+    <!--<link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/> -->
+    <link type="text/css" rel="stylesheet" href="{% static 'styles/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="{% static 'styles/flaticon.css' %}">
+    
+    <!-- Favicon icon -->
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Custom Stylesheet -->
+    <link type="text/css" rel="stylesheet" href="{% static 'styles/style.css' %}">
+
+</head>
+
+<body id="top">
+    <div class="page_loader"></div>
+
+    <!-- Login 1 section start -->
+    <div class="login-1">
+        <div class="container-fluid">
+            <div class="row login-box">
+                <div class="col-lg-6 align-self-center pad-0 form-section">
+                    <div class="form-inner">
+                        <a href="login-1.html" class="logo">
+                            <img src="{% static 'img/img.png' %}" alt="logo">
+                        </a>
+                        <h3>Sign Into Your Account</h3>
+                        {% if messages %}
+                        {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible text-center" role="alert">
+                            <strong>
+                                
+                                <strong {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Error{% else %}{{ message.tags|title }}{% endif %}>{{ message }}</strong>
+                                
+                            </strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                        <form action="/" method="POST" id="commonForm">{% csrf_token %}
+                            <div class="form-group position-relative clearfix">
+                                <input name="email" type="email" id="email" class="form-control" placeholder="Email Address"
+                                    aria-describedby="helpId" aria-label="Email Address" required>
+                                <div class="login-popover login-popover-abs" data-bs-toggle="popover"
+                                    data-bs-trigger="hover" title="Clarification"
+                                    data-bs-content="And here's some amazing content. It's very engaging. Right?">
+                                    <i class="fa fa-info-circle"></i>
+                                </div>
+                            </div>
+                            <div class="form-group clearfix position-relative password-wrapper">
+                                <input name="pass" type="password" class="form-control" autocomplete="off" id="pass" required
+                                    placeholder="Password" aria-label="Password">
+                                <i class="fa fa-eye password-indicator"></i>
+                            </div>
+                            <!-- <div class="checkbox form-group clearfix">
+                                <div class="form-check float-start">
+                                    <input class="form-check-input" type="checkbox" id="rememberme" onclick="myFunctoin()">
+                                    <label class="form-check-label" for="rememberme">
+                                       Remember me
+                                    </label>
+                                </div>
+                                <a href="forgot-password-1.html" class="link-light float-end forgot-password">Forgot
+                                    your password?</a>
+                            </div> -->
+                            <div class="form-group clearfix">
+                                <button type="submit" class="btn btn-primary btn-lg btn-theme">Login</button>
+                            </div>
+                            <div class="extra-login clearfix">
+                                <span>Or Register</span>
+                            </div>
+                        </form>
+                       
+                        <p>Don't have an account? <a href="signup" class="thembo"><b><u>Register here</u></b></a></p>
+                        <p><b><a class="thembo" href="aboutus"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
+                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                          </svg><b>   </b><i><u>About us</i></u></a></b></p>
+                    </div>
+                </div>
+                <div class="col-lg-6 pad-0 none-992 bg-img">
+                    <div class="lines">
+                        <div class="line"></div>
+                        <div class="line"></div>
+                        <div class="line"></div>
+                        <div class="line"></div>
+                        <div class="line"></div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="info">
+                        <div class="animated-text">
+                            <h1 >Welcome <span>to pare</span></h1>
+                        </div>
+                        <p>We are thrilled to have you at our Webapp. You're going to be a valuable asset to our company, and we can't wait to see all that you accomplish. The entire team of Pare is thrilled to welcome you. We hope you'll do some amazing chats here!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Login 1 section end -->
+
+    <!-- External JS libraries -->
+    <script src="{% static 'js/jquery1.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+    <!-- Custom JS Script -->
+</body>
+
+</html>

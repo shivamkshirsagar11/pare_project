@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="Description" content="Enter your description here"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+<title>Title</title>
+<style>
+  /*TODO: clean it all up, finish flex, add aesthetics, icons, redefine to be relative to vh-vw, maybe rework v2 variant using scss and frames and real transitions? */
+html body {
+  background-color: black;
+  margin: 0 0 0 0;
+}
+.infocardContainer * {
+  font-family: 'Fira Sans Condensed', sans-serif;
+  font-weight: 300;
+}
+h2 {
+  font-weight: 600; font-style: italic; font-family: "Fira Sans Condensed", sans-serif;
+}
+header {
+  height: 2em;
+  background-color: #111122;
+  margin: 0 0 0 0;
+  padding: auto;
+  font-size: 2em;
+  text-align: center;
+  line-height: 2em;
+  color: white;
+}
+a {
+  text-decoration: none;
+}
+a:visited {
+  color: #555566;
+}
+a:hover {
+  text-decoration: underline;
+}
+.infocardContainer {
+  display: flex;
+  height: 200px;
+  width: 200px;
+  border-radius: 100px;
+  background: rgb(0,159,255);
+  background: linear-gradient(121deg, rgba(255,255,255,0) 13%, rgba(0,159,255,1) 100%);
+  transition: all 500ms ease-in;
+  transition-delay: 1s;
+  margin: auto;
+  margin-top: 100px;
+  --margin-top: 100px;
+}
+.infocardContainer:hover {
+  width: 500px;
+  border-radius: 500px 10px 300px 500px;
+  transition: all 1s ease-out;
+}
+.infocardContainer div {
+  text-color: white;
+  flex-shrink: 1;
+  width: 100%;
+  --background-color: green;
+}
+.infocardContainer div * {
+  display: flex;
+  --flex: inherit;
+  overflow: hidden;
+  text-overflow: hidden;
+  --background-color: yellow;
+  color: white;
+  white-space: nowrap;
+  width: 0;
+  height: auto;
+  transition: all 450ms ease-in;
+  transition-delay: 1s;
+}
+.infocardContainer:hover div *{
+  --background-color: purple;
+  display: flex;
+  visibility: visible;
+  transition: all 1s ease-out;
+  transition-delay: 500ms;
+  width: 100%;
+  height: auto;
+}
+
+.infocardContainer #main, .infocardContainer #main img{
+  --background-color: red;
+  height: 200px;
+  width: 200px;
+  padding-right: 10px;
+  border-radius: 100%;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+.infocardContainer #main img{
+  height: 180px;
+  width: 180px;
+  transition: none;
+  display: float;
+  position: relative;
+  border: 10px solid white;
+  margin: 0 0 0 0; padding: 0 0 0 0;
+}
+.infocardContainer #textbois {
+  position: relative;
+}
+.infocardContainer #textbois #hotlinks {
+  max-width: 60%;
+  max-height: 30px;
+  
+  --background-color: white;
+  position:absolute;
+  bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 13px;
+}
+.infocardContainer #textbois #hotlinks * {
+  background-color: white;
+  max-width: 30px;
+  --margin: 0 1px 0 1px;
+  border-radius: 25px;
+}
+/*TODO: animate copy main transition style for info*/
+.infocardContainer #textbois #hotlinks *:hover {
+
+}
+
+</style>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Fira+Sans+Condensed:300,400,600i&display=swap" rel="stylesheet">
+
+</head>
+<body>
+  
+  <div class="infocardContainer">
+    <div id="main">
+      <img src="/media/aboutus/shivam.jpg"></img>
+    </div>
+    <div id="textbois">
+      <h2 style="color:lightblue;">Shivam Kshirsagar</h2>
+      <small>Backend and Frondend Developer</small>
+      <h4 style="color:lightgreen;" class="show">Rookie Developer</h4>
+      <a href="mailto:shivamkshirsagar2002@gmail.com">shivamkshirsagar2002@gmail.com</a>
+      <br>
+      <a href="https://github.com/shivamkshirsagar11" style="width:30px;height:30px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+      
+    </div>
+  </div>
+
+
+
+
+  
+  <div class="infocardContainer">
+    <div id="main">
+      <img src="/media/aboutus/sahil.jpg"></img>
+    </div>
+    <div id="textbois">
+      <h2 style="color:lightblue;">Sahil Nandaniya</h2>
+      <small>Designer and Backend developer</small>
+      <h4 style="color:yellow;">Rookie Developer</h4>
+      
+      <a href="mailto:sahilnandaniya556@gmail.com">sahilnandaniya556@gmail.com</a>
+      <br>
+      <a href="https://github.com/sahil556" style="width:30px;height:30px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+    </div>
+  </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+</body>
+</html>
