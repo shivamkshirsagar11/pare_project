@@ -210,6 +210,7 @@ def linkfriends(request):
                 if friend2 is not None : 
                     if friend.status == "Blocked": return JsonResponse({"msg":"Blocked"})
                     elif friend.status == "Unavailable": return JsonResponse({"msg":"Unavailable"})
+                    elif friend.status == "Unavailable-sent": return JsonResponse({"msg":"Unavailable"})
                     return JsonResponse({"msg":"Already friend!"})
                 return JsonResponse({"msg":"req sent"}) 
             friend = makeFriends.objects.filter(requested = request.session["name"],requester = name,status = "requested").first()
@@ -247,9 +248,11 @@ def ManageRequest(request):
             requester = request.POST['Othername']
             friend = makeFriends.objects.filter(requested = requested,requester = requester).first().delete()
             return HttpResponse("Done")
+
         if request.POST['Manage'] == "Block":
             requested = request.session["name"]
             requester = request.POST['Othername']
+            print(requester,requested)
             friend = makeFriends.objects.filter(requested = requested,requester = requester).first()
             if friend is not None : 
                 friend.status = "Unavailable"
@@ -258,6 +261,15 @@ def ManageRequest(request):
                 newfriend = makeFriends(bpu = ins_user,requester = requested,requested = requester,status = "Blocked")
                 newfriend.save()
                 return HttpResponse("Done")
+            else:
+                friend = makeFriends.objects.filter(requested = requester,requester = requested).first()
+                friend.status = "Blocked"
+                friend.save()
+                ins_user = bp.objects.filter(name = requester).first()
+                newfriend = makeFriends(bpu = ins_user,requested = requested,requester = requester,status = "Unavailable-sent")
+                newfriend.save()
+                return HttpResponse("Done")
+            
         if request.POST['Manage'] == "Unfriend":
             requested = request.session["name"]
             requester = request.POST['Othername']
@@ -284,13 +296,20 @@ def ManageRequest(request):
                 friend2.status = "Blocked"
                 friend2.save()
                 return HttpResponse("Done")
+
         if request.POST['Manage'] == "Unblock-friend":
             requested = request.session["name"]
             requester = request.POST['Othername']
+            print(requester,requested)
             friend = makeFriends.objects.filter(requested = requested,requester = requester).first()
-            if friend is not None : 
-                friend.status = "requested"
-                friend.save()
+            print(friend)
+            if friend is not None :
+                if friend.status == "Unavailable-sent": 
+                    friend.delete()
+                    makeFriends.objects.filter(requester = requested,requested = requester).first().delete()
+                else: 
+                    friend.status = "requested"
+                    friend.save()
                 makeFriends.objects.filter(requested = requester,requester = requested).first().delete()
                 return HttpResponse("Done")
 

@@ -24,9 +24,13 @@ class makeFriends(m.Model):
     requester = m.EmailField(max_length=255)
     requested = m.EmailField(max_length=255)
     status = m.TextField(max_length=25,default="requested")
+    def __str__(self):
+        return str(self.requester)+" -> "+str(self.requested)+" status: "+str(self.status)
 
 class twousermessage(m.Model):
     date = m.CharField(max_length=25,default = "")
     messages = m.CharField(max_length=512,default="")
     userFrom = m.CharField(max_length=25,null=False)
     userTo = m.CharField(max_length=25,null=False)
+    def __str__(self):
+        return str(self.userFrom)+"->"+str(self.userTo)
