@@ -7,8 +7,7 @@
     <meta charset="utf-8" />
     <title>Pare | chat with pare</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="Responsive Bootstrap 4 Chat App" name="description" />
-    <meta content="Themesbrand" name="author" />
+    <meta content="Responsive Chat App" name="description" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="assets/images/favicon.ico">
 
@@ -47,8 +46,8 @@
         }
 
         #display {
-            width:95%;
-            height:650px;
+            width: 95%;
+            height: 600px;
             overflow-y: scroll;
         }
 
@@ -523,11 +522,8 @@
                             <div class="chat-message-list px-2" data-simplebar>
 
                                 <ul class="list-unstyled chat-list chat-user-list">
-                                    
-                                    <li>
-                                        
-                                        {% for i in data %}
-                                        <div id="appending">
+                                    {% for i in data %}
+                                    <li id="appending">
                                         <a onclick="chatNow('{{i.friendBase.name}}')">
 
                                             <div class="d-flex align-items-center">
@@ -548,11 +544,8 @@
                                             </div>
 
                                         </a>
-                                    </div>
-                                        {% endfor %}
-                                    
                                     <li>
-                                        
+                                        {% endfor %}
 
                                         {% comment %}
                                     <li class="unread">
@@ -1570,19 +1563,7 @@
                                         </div>
                                     </li>
 
-                                    {% comment %} <li class="list-inline-item d-none d-lg-inline-block me-2 ms-0">
-                                        <button type="button" class="btn nav-btn" data-bs-toggle="modal">
-                                             data-bs-target="#audiocallModal"> 
-                                            <i class="ri-phone-line-muted"></i>
-                                        </button>
-                                    </li>
-
-                                    <li class="list-inline-item d-none d-lg-inline-block me-2 ms-0">
-                                        <button type="button" class="btn nav-btn" data-bs-toggle="modal">
-                                             data-bs-target="#videocallModal"> 
-                                            <i class="ri-vidicon-line-muted"></i>
-                                        </button>
-                                    </li> {% endcomment %}
+                              
 
                                     <li class="list-inline-item d-none d-lg-inline-block me-2 ms-0">
                                         <button type="button" class="btn nav-btn user-profile-show">
@@ -1600,17 +1581,12 @@
                                                 <a class="dropdown-item d-block d-lg-none user-profile-show"
                                                     href="#">View profile <i
                                                         class="ri-user-2-line float-end text-muted"></i></a>
-                                                <a class="dropdown-item d-block d-lg-none" href="#"
-                                                    data-bs-toggle="modal" data-bs-target="#audiocallModal">Audio <i
-                                                        class="float-end text-muted"></i></a>
-                                                <a class="dropdown-item d-block d-lg-none" href="#"
-                                                    data-bs-toggle="modal" data-bs-target="#videocallModal">Video <i
-                                                        class="ri-vidicon-line float-end text-muted"></i></a>
-                                                <a class="dropdown-item text-muted" href="#" title="This feature will available in V2.0">Archive <i
+                                               
+                                                <a class="dropdown-item text-muted href="#" title="This feature will available in V2.0">Archive <i
                                                         class="ri-archive-line float-end text-muted"></i></a>
-                                                <a class="dropdown-item text-muted" href="#" title="This feature will available in V2.0">Muted <i
+                                                <a class="dropdown-item text-muted href="#" title="This feature will available in V2.0">Muted <i
                                                         class="ri-volume-mute-line float-end text-muted"></i></a>
-                                                <a class="dropdown-item text-muted" href="#" title="This feature will available in V2.0">Delete <i
+                                                <a class="dropdown-item text-muted href="#" title="This feature will available in V2.0">Delete <i
                                                         class="ri-delete-bin-line float-end text-muted"></i></a>
                                             </div>
                                         </div>
@@ -2069,7 +2045,7 @@
                             <div class="col">
                                 <form id="sendChatForm" method="post"> {% csrf_token %}
                                     <input type="text" class="form-control form-control-lg bg-light border-light"
-                                        placeholder="Enter Message..." name="message" id="message" required>
+                                        placeholder="Enter Message..." name="message" id="message" autocomplete="off" required>
                             </div>
                             <div class="col-auto">
                                 <div class="chat-input-links ms-md-2 me-md-0">
@@ -2494,7 +2470,7 @@
                     processData: false,
                     data: formData,
                     success: function (data) {
-                       location.href="home";
+                       
                     },
                     error: function (data) {
                         alert("error");
@@ -2563,11 +2539,15 @@
                                         + "</p>"
                                         + "<p class='chat-time mb-0'><i class='ri-time-line align-middle'></i> <span class='align-middle'>" + response.msg[i].date + "</span></p></div>"
                                         +"<div class='dropdown align-self-start'>"
-                                        +"<a class='dropdown-toggle' role='button'"
+                                        +"<a role='button'"
                                         +"data-bs-toggle='dropdown' aria-haspopup='true'"
                                         +"aria-expanded='false'><i class='ri-more-2-fill'></i></a>"
                                         +"<div class='dropdown-menu'>"     
-                                        +"<a class='text-muted dropdown-toggle' onclick=\"removeMsg('"+response.msg[i].id+"')\">Delete <i class='bi bi-trash'></i>"
+                                        +"<a style='width:10px' onclick=\"removeMsg('"+response.msg[i].id+"')\">&nbsp;Delete Message&nbsp;&nbsp; "
+                                        +"<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-trash' viewBox='0 0 16 16'>"
+                                        +"<path d='M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z'/>"
+                                        + "<path fill-rule='evenodd' d='M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z'/>"
+                                        + "</svg>"
                                         +"</a>"
                                         +"</div></div></div>"
                                         + " <div class='conversation-name'>" + response.msg[i].userFrom + "</div></div></div> </li>";
@@ -2589,7 +2569,7 @@
 
                             }
                             
-                               var myDiv = $('#display');
+                                var myDiv = $('#display');
                                 myDiv.scrollTop(myDiv[0].scrollHeight - myDiv[0].clientHeight);
                             
                         }
@@ -3075,7 +3055,7 @@
             csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
           },
           success: function(data){
-           
+  
           }
         });
       }
