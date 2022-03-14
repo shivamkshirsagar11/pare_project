@@ -1,5 +1,8 @@
+from base64 import b64encode
+import base64
 import datetime
 import email
+from cryptography.fernet import Fernet
 from pickle import NONE
 import random
 from unicodedata import name
@@ -48,6 +51,10 @@ def login(request):
                     if msg is None:
                         temp2 = {"friendBase":bpu,"pic":temp,"msg":"start chat with "+i.requested+" now!","friendFull":fpu,"time":""}
                     else: 
+                        key = msg.key
+                        tempmsg = msg.messages
+                        fernet = Fernet(key.encode())
+                        msg.messages = fernet.decrypt(tempmsg.encode()).decode()
                         temp2 = {"friendBase":bpu,"pic":temp,"msg":msg.messages,"friendFull":fpu,"time":msg.date}
                     picsoffriends.append(temp2)
                 otherpic = []
@@ -147,6 +154,10 @@ def change(request):
                     if msg is None: 
                         temp2 = {"friendBase":bpu,"pic":temp,"msg":"start chat with "+i.requested+" now!","friendFull":fpu,"time":""}
                     else: 
+                        key = msg.key
+                        tempmsg = msg.messages
+                        fernet = Fernet(key.encode())
+                        msg.messages = fernet.decrypt(tempmsg.encode()).decode()
                         temp2 = {"friendBase":bpu,"pic":temp,"msg":msg.messages,"friendFull":fpu,"time":""}
                     picsoffriends.append(temp2)
                 return render(request, 'home.html',{"user":ins_user,"fullp":ins_user_full,"data":picsoffriends})
@@ -169,6 +180,10 @@ def home(request):
             if msg is None: 
                 temp2 = {"friendBase":bpu,"pic":temp,"msg":"start chat with "+i.requested+" now!","friendFull":fpu,"time":""}
             else: 
+                key = msg.key
+                tempmsg = msg.messages
+                fernet = Fernet(key.encode())
+                msg.messages = fernet.decrypt(tempmsg.encode()).decode()
                 temp2 = {"friendBase":bpu,"pic":temp,"msg":msg.messages,"friendFull":fpu,"time":""}
             picsoffriends.append(temp2)
         otherpic = []
@@ -327,8 +342,11 @@ def blocked(request):
 def sendchat(request):
     chatfrom = request.POST['ufrom']
     chatto = request.POST['to']
-    message = request.POST['message']
-    messageObj = twousermessage(userFrom = chatfrom,userTo = chatto,messages = message,date = datetime.datetime.now().strftime("%I:%M%p"))
+    message2 = request.POST['message']
+    key = Fernet.generate_key()
+    fernet = Fernet(key)
+    message = fernet.encrypt(message2.encode())
+    messageObj = twousermessage(userFrom = chatfrom,userTo = chatto,messages = message.decode(),date = datetime.datetime.now().strftime("%I:%M%p"),key=key.decode())
     messageObj.save()
     return HttpResponse("Message sent")
 @csrf_exempt
@@ -337,6 +355,15 @@ def getmsg(request):
         ufrom = request.session['name']
         uto = request.POST['touser']
         chatmsg =  twousermessage.objects.values().filter(Q(userFrom = ufrom,userTo = uto) | Q(userTo = ufrom,userFrom = uto))
+        # chatmsg2 =  twousermessage.objects.filter(Q(userFrom = ufrom,userTo = uto) | Q(userTo = ufrom,userFrom = uto))
+        litemp = []
+        for i in chatmsg:
+            key = i['key']
+            msg = i['messages']
+            # base64.urlsafe_b64decode(key)
+            fernet = Fernet(key.encode())
+            i['messages'] = fernet.decrypt(msg.encode()).decode()
+        print(chatmsg)
         li = list(chatmsg)
         ins_user = bp.objects.filter(name=uto).first()
         ins_user_full = fp.objects.values().filter(bpu_id = ins_user.id).first()

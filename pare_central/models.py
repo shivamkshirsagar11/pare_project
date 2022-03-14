@@ -32,5 +32,6 @@ class twousermessage(m.Model):
     messages = m.CharField(max_length=512,default="")
     userFrom = m.CharField(max_length=25,null=False)
     userTo = m.CharField(max_length=25,null=False)
+    key = m.CharField(max_length=255,default="",null=False)
     def __str__(self):
         return str(self.userFrom)+"->"+str(self.userTo)
