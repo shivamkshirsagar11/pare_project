@@ -22,7 +22,7 @@
 
     <!-- Custom Stylesheet -->
     <link type="text/css" rel="stylesheet" href="{% static 'styles/style.css' %}">
-
+    
 </head>
 
 <body id="top">
@@ -128,6 +128,21 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
 
     <!-- Custom JS Script -->
+    {% comment %} <script>
+        var history_api = typeof history.pushState !== 'undefined';
+        if (location.hash == '#no-back') {
+            if (history_api) history.pushState(null, '', '#stay')
+            else location.hash = '#stay'
+ 
+            window.onhashchange = function () {
+                if (location.hash == '#no-back') {
+                    alert('Action cannot be done!');
+                    if (history_api) history.pushState(null, '', '#stay')
+                    else location.hash = '#stay'
+                }
+            }
+        }
+        </script> {% endcomment %}
 </body>
 
 </html>

@@ -23,7 +23,7 @@ def logout(request):
         ins_user.lastActive = datetime.datetime.now().strftime("%H:%M:%S%p")
         ins_user.save()
         request.session["email"] = "Unverified"
-        return redirect("/")
+        return render(request,'index.html')
     except:
         return redirect("/")
 def login(request):
